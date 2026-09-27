@@ -1,335 +1,892 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RIFAN — Creative Developer & 3D Spatial Designer</title>
+  <title>Rian Kristiani Mohamad Sofyan — Staff Keuangan</title>
+  <meta name="description" content="Portofolio Profesional Rian Kristiani Mohamad Sofyan - Staff Keuangan, Multi-Entity Financial Operations, ERP Cut-Off &amp; Audit Readiness Specialist." />
+  
+  <!-- Modern Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=interactive-slider" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css?v=1.1" />
 </head>
 <body>
-  <!-- Preloader -->
-  <div id="loader" class="loader">
-    <div class="loader-content">
-      <div class="loader-brand">RIFAN <span>// 01</span></div>
-      <div class="loader-track">
-        <div id="loaderBar" class="loader-bar"></div>
-      </div>
-      <div class="loader-text" id="loaderText">INITIALIZING 3D ENGINE 0%</div>
-    </div>
+  <!-- Fullscreen 3D Background Canvas Stage -->
+  <div class="stage-container" id="stageContainer" aria-hidden="true">
+    <canvas id="ambientCanvas"></canvas>
+    <div class="stage-ambient-glow"></div>
+    <div class="stage-vignette-overlay"></div>
   </div>
 
-  <!-- Background 3D Canvas Stage -->
-  <div class="stage-container">
-    <canvas id="canvas"></canvas>
-    <div class="stage-ambient-glow"></div>
-    <div class="stage-grid"></div>
-  </div>
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
   <!-- Floating Glassmorphic Navbar -->
-  <header class="navbar">
+  <header class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="#hero" class="nav-logo">
+      <a href="#hero" class="nav-logo" aria-label="Rian Profile Home">
         <span class="logo-mark">R</span>
-        <span class="logo-text">RIFAN <em>/ 3D</em></span>
+        <span class="logo-text">RIAN KRISTIANI MOHAMAD SOFYAN <em>// STAFF KEUANGAN</em></span>
       </a>
 
       <div class="nav-controls-group">
-        <div class="nav-status">
+        <div class="nav-status-badge">
           <span class="status-pulse"></span>
-          <span class="status-text">Available for Projects</span>
+          <span class="status-label">Siap Berkontribusi &amp; Open to Work</span>
         </div>
 
-        <button id="toggleBgModeBtn" class="nav-bg-mode-btn" title="Klik untuk ganti mode tampilan foto (Full Seamless / Full Cover)">
+        <button type="button" id="toggleBgModeBtn" class="nav-bg-mode-btn" title="Ganti Mode Tampilan Background (Full Seamless / Full Cover)">
           <span class="mode-icon">⛶</span>
-          <span id="bgModeText">BG: Full Seamless</span>
+          <span id="bgModeText">BG: Seamless</span>
         </button>
       </div>
 
-      <nav class="nav-menu">
-        <a href="#experience" class="nav-link">Work Experience</a>
-        <a href="#vault" class="nav-link">Project Vault</a>
-        <a href="#skills" class="nav-link">Tech Matrix</a>
-        <a href="#contact" class="nav-link nav-btn">Let's Talk</a>
+      <nav class="nav-menu" id="navMenu">
+        <a href="#about" class="nav-link">Tentang</a>
+        <a href="#experience" class="nav-link">Pengalaman</a>
+        <a href="#projects" class="nav-link">Project</a>
+        <a href="#skills" class="nav-link">Keahlian</a>
+        <a href="#education" class="nav-link">Pendidikan</a>
+        <a href="#contact" class="nav-link nav-btn-cta">Hubungi Saya</a>
       </nav>
+
+      <button class="nav-mobile-toggle" id="mobileMenuBtn" aria-label="Buka Menu Navigasi">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
-  <!-- Interactive 3D Content Container -->
-  <main class="content-stage">
-    
-    <!-- Hero Section -->
+  <!-- Main Content Wrapper -->
+  <main class="content-wrapper">
+
+    <!-- HERO SECTION (Fullscreen 3D Background & Executive HUD) -->
     <section id="hero" class="section hero-section">
-      <div class="hero-content tilt-element" data-depth="20">
-        <div class="hero-tag">
-          <span class="tag-icon">✦</span>
-          <span>INTERACTIVE 3D & CREATIVE ENGINEERING</span>
+      <div class="hero-container">
+        
+        <!-- Primary Column: Executive Summary & CTAs -->
+        <div class="hero-text-col tilt-element" data-depth="15">
+          <div class="hero-badge">
+            <span class="badge-icon">✦</span>
+            <span>STAFF KEUANGAN</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span>AKURASI DATA</span>
+            <span class="text-gradient">FINANSIAL &amp;</span>
+            <span>AUDIT READINESS.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Profesional keuangan berpengalaman dalam pengelolaan operasional multi-entitas, alokasi <em>intercompany cost sharing</em>, evaluasi SOP kesiapan audit (FAR), transisi data <em>cut-off</em> ERP, serta analisis AR/AP dan rekonsiliasi kas harian yang presisi.
+          </p>
+
+          <!-- Key Metrics Counter Bar -->
+          <div class="hero-stats-row">
+            <div class="stat-item">
+              <span class="stat-number">5+</span>
+              <span class="stat-desc">Perusahaan Multi-Entitas Dimonitor</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-desc">Akurasi Rekonsiliasi &amp; Cash Opname</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number">3.41</span>
+              <span class="stat-desc">IPK S1 Administrasi Bisnis</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              <span>Lihat Hasil Project</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#experience" class="btn btn-secondary">
+              <span>Rekam Jejak Karir</span>
+            </a>
+            <button id="viewCvBtn" class="btn btn-ghost" title="Buka Ringkasan CV Lengkap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <span>CV Lengkap</span>
+            </button>
+          </div>
+
+          <!-- Subtle Gesture Cue for Mobile (Android & iOS) and Desktop -->
+          <div class="hero-gesture-hint" id="heroGestureHint">
+            <span class="gesture-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8L22 12L18 16"/><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
+            </span>
+            <span class="gesture-text">Swipe / geser layar ke samping untuk memutar foto background 360°</span>
+            <button type="button" class="btn-mini-auto" id="btnAutoRotateMini" title="Mulai / Jeda Putar Otomatis 360°">
+              <span id="autoRotateIconMini">⏵</span>
+              <span id="autoRotateLabelMini">Auto 360°</span>
+            </button>
+          </div>
         </div>
-        <h1 class="hero-title">
-          <span>SHAPING</span>
-          <span class="text-gradient">DIMENSIONS</span>
-          <span>IN CODE.</span>
-        </h1>
-        <p class="hero-subtitle">
-          Merging cutting-edge WebGL, cinematic motion, and high-performance frontend architecture into unforgettable digital experiences.
-        </p>
-        <div class="hero-actions">
-          <a href="#experience" class="btn btn-primary">
-            <span>Work Experience</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-          </a>
-          <a href="#vault" class="btn btn-secondary">
-            <span>Project Vault 🚀</span>
-          </a>
-        </div>
+
       </div>
 
-      <div class="scroll-cue">
+      <!-- Scroll Down Cue -->
+      <a href="#about" class="scroll-cue" aria-label="Gulir ke Bawah">
         <div class="mouse-icon">
           <div class="wheel"></div>
         </div>
-        <span>SCROLL TO EXPLORE</span>
+        <span>GULIR UNTUK MENJELAJAHI</span>
+      </a>
+    </section>
+
+    <!-- 01 / TENTANG SAYA -->
+    <section id="about" class="section about-section">
+      <div class="section-header">
+        <span class="section-num">01 / PROFIL</span>
+        <h2 class="section-title">TENTANG SAYA</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="glass-card tilt-card about-main-card" data-depth="20">
+          <div class="card-glare"></div>
+          <div class="about-lead">
+            <p>
+              Saya adalah praktisi berpengalaman sebagai <strong>Staff Keuangan</strong> dengan rekam jejak dalam tata kelola operasional keuangan multi-perusahaan, alokasi biaya bersama (<em>intercompany cost sharing</em>), serta integrasi data <em>cut-off</em> ke sistem Enterprise Resource Planning (ERP).
+            </p>
+            <p>
+              Berpengalaman memimpin kesiapan data sebelum tinjauan eksekutif bulanan (<em>Business Review</em>), menjaga kelancaran <em>cash flow</em> melalui pengendalian ketat akun AR/AP, serta melaksanakan pengawasan standar operasional prosedur (SOP) untuk memastikan kesiapan audit dan memaksimalkan skor <em>Financial Audit Report</em> (FAR).
+            </p>
+          </div>
+
+          <div class="about-pillars">
+            <div class="pillar-box">
+              <div class="pillar-icon">📊</div>
+              <h4>Multi-Entity Oversight</h4>
+              <p>Pengawasan konsolidasi dan Laporan Kas Harian (LKH) untuk 5 entitas bisnis secara simultan.</p>
+            </div>
+
+            <div class="pillar-box">
+              <div class="pillar-icon">⚖️</div>
+              <h4>FAR &amp; Audit Ready</h4>
+              <p>Evaluasi SOP ketat, verifikasi voucher keuangan, serta pelaksanaan <em>cash opname</em> fisik (<em>genba</em>).</p>
+            </div>
+
+            <div class="pillar-box">
+              <div class="pillar-icon">💻</div>
+              <h4>ERP &amp; Tech Fluent</h4>
+              <p>Penguasaan sistem ERP in-house, GL, Sunfish, formula spreadsheet advance, hingga data analytics &amp; web.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Quick Card -->
+        <div class="glass-card tilt-card about-contact-card" data-depth="25">
+          <div class="card-glare"></div>
+          <h3 class="card-title">Informasi Personal</h3>
+          
+          <ul class="contact-info-list">
+            <li>
+              <span class="info-label">Nama Lengkap</span>
+              <span class="info-value">Rian Kristiani Mohamad Sofyan</span>
+            </li>
+            <li>
+              <span class="info-label">Pendidikan</span>
+              <span class="info-value">S1 Administrasi Bisnis (IPK 3,41)</span>
+            </li>
+            <li>
+              <span class="info-label">Nomor Telepon</span>
+              <div class="copy-field">
+                <span class="info-value" id="valPhone">085926056829</span>
+                <button class="btn-copy-small" data-copy="085926056829" title="Salin Nomor HP">Salin</button>
+              </div>
+            </li>
+            <li>
+              <span class="info-label">Email Resmi</span>
+              <div class="copy-field">
+                <span class="info-value" id="valEmail">riankmohamadsofyan@gmail.com</span>
+                <button class="btn-copy-small" data-copy="riankmohamadsofyan@gmail.com" title="Salin Email">Salin</button>
+              </div>
+            </li>
+            <li>
+              <span class="info-label">Domisili</span>
+              <span class="info-value">Jl. Rajawali Timur No.192/26, Kota Bandung 40182</span>
+            </li>
+          </ul>
+
+          <div class="quick-contact-actions">
+            <a href="https://wa.me/6285926056829?text=Halo%20Rian,%20saya%20tertarik%20dengan%20profil%20dan%20portofolio%20keuangan%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-emerald-outline">
+              <span>Chat via WhatsApp</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 01 / Work Experience Section -->
-    <section id="experience" class="section projects-section">
+    <!-- 02 / PENGALAMAN KERJA -->
+    <section id="experience" class="section experience-section">
       <div class="section-header">
-        <span class="section-num">01 / CAREER</span>
-        <h2 class="section-title">Work Experience</h2>
+        <span class="section-num">02 / KARIR</span>
+        <h2 class="section-title">PENGALAMAN KERJA</h2>
+        <p class="section-desc">Rekam jejak profesional dalam divisi operasional keuangan, audit internal, administrasi multi-cabang, dan kendali mutu.</p>
       </div>
 
-      <div class="projects-grid">
-        <!-- Pengalaman 1 -->
-        <div class="project-card tilt-card" data-depth="35">
+      <div class="timeline-container">
+        
+        <!-- Experience 1: Dialogue Group -->
+        <article class="timeline-card glass-card tilt-card" data-depth="20">
           <div class="card-glare"></div>
-          <div class="project-preview preview-1">
-            <div class="project-overlay"></div>
-            <span class="project-category">VENDOR / IT SOLUTION</span>
+          <div class="card-badge-row">
+            <span class="timeline-period">Mei 2026 – September 2026</span>
+            <span class="badge-role">Multi-Entity &amp; ERP Support</span>
           </div>
-          <div class="project-body">
-            <h3 class="project-title">Vendor Amora Craft House</h3>
-            <p class="project-desc">
-              Vendor profesional penyedia solusi teknologi digital terintegrasi untuk Amora Craft House (Toko Bunga / Florist): merancang dan mengembangkan sistem website e-commerce pelanggan, dashboard operasional admin untuk kelola pesanan &amp; produk, serta panel owner dengan monitoring omzet real-time, audit log, dan verifikasi absensi karyawan.
-            </p>
-            <div class="project-tags">
-              <span>Vendor IT</span>
-              <span>Web Toko Bunga</span>
-              <span>Admin &amp; Owner Panel</span>
-              <span>E-Commerce Florist</span>
-              <span>Supabase &amp; React</span>
-            </div>
-            <div class="project-links">
-              <a href="#vault" class="proj-link">Lihat Dokumentasi ↗</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Pengalaman 2 -->
-        <div class="project-card tilt-card" data-depth="35">
+          <div class="timeline-header">
+            <h3 class="role-title">Staff Finance Support</h3>
+            <h4 class="company-title">Dialogue Group</h4>
+          </div>
+
+          <p class="role-summary">
+            Memegang tanggung jawab sentral dalam pengawasan kelancaran keuangan multi-entitas, konsolidasi laporan kas, kesiapan audit sistemik, serta skema alokasi beban biaya operasional.
+          </p>
+
+          <ul class="role-bullets">
+            <li>
+              <strong>Pelaporan Finansial 5 Perusahaan:</strong> Memonitor dan mengevaluasi pelaporan keuangan rutin secara serentak untuk 5 entitas bisnis di bawah Dialogue Group.
+            </li>
+            <li>
+              <strong>Akurasi Laporan Kas Harian (LKH):</strong> Memastikan seluruh transaksi kas keluar-masuk dicatat dan tervalidasi secara presisi setiap hari.
+            </li>
+            <li>
+              <strong>Cash Opname &amp; Genba Fisik:</strong> Melakukan pemeriksaan fisik kas (*cash opname / genba*) berkala dan audit kelengkapan berkas voucher transaksi.
+            </li>
+            <li>
+              <strong>Transisi &amp; Cut-Off Data ERP:</strong> Bertanggung jawab langsung atas proses validasi <em>cut-off</em> data keuangan menuju integrasi sistem ERP baru.
+            </li>
+            <li>
+              <strong>Audit Readiness (FAR):</strong> Memastikan kepatuhan operasional seluruh entitas bisnis terhadap SOP untuk memaksimalkan skor <em>Financial Audit Report</em> (FAR).
+            </li>
+            <li>
+              <strong>Intercompany Cost Sharing:</strong> Merinci kalkulasi alokasi pembagian biaya operasional dan utilitas antar-entitas secara transparan dan proporsional.
+            </li>
+            <li>
+              <strong>Business Review (BR) &amp; Executive Closing:</strong> Mengorkestrasi kesiapan data BR sebelum <em>monthly executive review</em>, menyusun grafik visualisasi data, dan mendistribusikan email <em>closing</em> sebagai acuan keputusan manajemen.
+            </li>
+            <li>
+              <strong>Pengendalian AR/AP:</strong> Mengelola penagihan <em>collection</em> dan rekapitulasi piutang-utang guna mengamankan likuiditas arus kas (*cashflow*).
+            </li>
+          </ul>
+
+          <div class="skill-tags-group">
+            <span class="tag-pill">Multi-Entity Finance</span>
+            <span class="tag-pill">Laporan Kas Harian (LKH)</span>
+            <span class="tag-pill">Cash Opname (Genba)</span>
+            <span class="tag-pill">ERP Cut-Off</span>
+            <span class="tag-pill">Financial Audit Report (FAR)</span>
+            <span class="tag-pill">Intercompany Cost Sharing</span>
+            <span class="tag-pill">Business Review (BR)</span>
+            <span class="tag-pill">AR/AP Control</span>
+          </div>
+        </article>
+
+        <!-- Experience 2: PT Geoservices -->
+        <article class="timeline-card glass-card tilt-card" data-depth="20">
           <div class="card-glare"></div>
-          <div class="project-preview preview-btn">
-            <div class="project-overlay"></div>
-            <span class="project-category">IT SUPPORT / BANKING</span>
+          <div class="card-badge-row">
+            <span class="timeline-period">Maret 2022 – September 2025 (3.5 Tahun)</span>
+            <span class="badge-role">Branch Finance &amp; AR Specialist</span>
           </div>
-          <div class="project-body">
-            <h3 class="project-title">IT Support PT. Bank Tabungan Negara</h3>
-            <p class="project-desc">
-              Memberikan dukungan teknis infrastruktur IT di lingkungan perbankan, menangani troubleshooting perangkat keras dan jaringan, konfigurasi server rack dan switch LAN, serta memastikan kelancaran operasional sistem perbankan harian.
-            </p>
-            <div class="project-tags">
-              <span>IT Support</span>
-              <span>LAN / Switch</span>
-              <span>Server Rack</span>
-              <span>Troubleshooting</span>
-              <span>System Operation</span>
-            </div>
-            <div class="project-links">
-              <a href="#vault" class="proj-link">Lihat Dokumentasi ↗</a>
-            </div>
-          </div>
-        </div>
 
-        </div>
+          <div class="timeline-header">
+            <h3 class="role-title">Admin Finance</h3>
+            <h4 class="company-title">PT Geoservices</h4>
+          </div>
+
+          <p class="role-summary">
+            Mengelola siklus administrasi keuangan terpusat untuk jaringan kantor cabang, penagihan piutang usaha (AR), rekonsiliasi perbankan, dan audit dokumen legalitas proyek.
+          </p>
+
+          <ul class="role-bullets">
+            <li>
+              <strong>Monitoring Keuangan Multi-Cabang:</strong> Monitoring dan evaluasi harian pelaporan tim cabang serta rekap saldo kas masing-masing kantor cabang.
+            </li>
+            <li>
+              <strong>Kompilasi Kasus &amp; Fee Management:</strong> Menangani rekap kasus keuangan serta pengelolaan pembagian *fee payment* dan *royalty*.
+            </li>
+            <li>
+              <strong>Verifikasi Dokumen Legal &amp; Kontrak:</strong> Memeriksa keabsahan dokumen pendukung seperti Purchase Order (PO), surat jalan, dan klausul kontrak klien.
+            </li>
+            <li>
+              <strong>Faktur &amp; Invoice Billing:</strong> Membuat, memvalidasi faktur komersial, serta memantau jadwal jatuh tempo pelunasan invoice secara sistematis.
+            </li>
+            <li>
+              <strong>Manajemen Piutang (AR) &amp; Rekonsiliasi Bank:</strong> Menyusun laporan rutin piutang usaha (Accounts Receivable aging) dan melakukan rekonsiliasi mutasi rekening bank secara berkala.
+            </li>
+          </ul>
+
+          <div class="skill-tags-group">
+            <span class="tag-pill">Accounts Receivable (AR)</span>
+            <span class="tag-pill">Rekonsiliasi Bank</span>
+            <span class="tag-pill">Multi-Branch Monitoring</span>
+            <span class="tag-pill">Invoice &amp; Billing</span>
+            <span class="tag-pill">PO &amp; Contract Verification</span>
+            <span class="tag-pill">Fee &amp; Royalty Allocation</span>
+          </div>
+        </article>
+
+        <!-- Experience 3: CV Chillest Printing -->
+        <article class="timeline-card glass-card tilt-card" data-depth="20">
+          <div class="card-glare"></div>
+          <div class="card-badge-row">
+            <span class="timeline-period">Februari 2015 – Agustus 2017</span>
+            <span class="badge-role">Operations &amp; Quality Control</span>
+          </div>
+
+          <div class="timeline-header">
+            <h3 class="role-title">Staff Produksi &amp; Quality Control (QC)</h3>
+            <h4 class="company-title">CV. Chillest Printing</h4>
+          </div>
+
+          <p class="role-summary">
+            Memastikan standardisasi mutu cetak, ketepatan spesifikasi order konsumen, penyortiran bahan baku, dan evaluasi efisiensi tim produksi lapangan.
+          </p>
+
+          <ul class="role-bullets">
+            <li>Pemeriksaan kualitas menyeluruh sebelum barang diproduksi dan dikirim ke pelanggan.</li>
+            <li>Penyortiran material sesuai kategori produksi dan standar mutu yang ditentukan.</li>
+            <li>Evaluasi berkala performa alur kerja tim produksi untuk meminimalkan tingkat *reject*.</li>
+          </ul>
+
+          <div class="skill-tags-group">
+            <span class="tag-pill">Quality Control (QC)</span>
+            <span class="tag-pill">Manajemen Standarisasi</span>
+            <span class="tag-pill">Evaluasi Alur Kerja</span>
+          </div>
+        </article>
+
+      </div>
     </section>
 
-    <!-- 02 / Project Vault & Video Archive -->
-    <section id="vault" class="section vault-section">
+    <!-- 03 / PROJECT PORTFOLIO -->
+    <section id="projects" class="section projects-section">
       <div class="section-header">
-        <div class="header-split">
-          <div>
-            <span class="section-num">02 / REPOSITORY</span>
-            <h2 class="section-title">PROJECT VAULT &amp; SHOWCASE</h2>
-          </div>
-          <div class="vault-controls">
-            <label for="localVideoUpload" class="btn btn-secondary btn-upload" title="Pilih video atau gambar dari komputermu untuk dipratinjau secara instan">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-              <span>+ Preview Media Lokal</span>
-              <input type="file" id="localVideoUpload" accept="video/*,image/*" style="display: none;" />
-            </label>
-          </div>
-        </div>
+        <span class="section-num">03 / PROJECT</span>
+        <h2 class="section-title">FEATURED PROJECTS</h2>
         <p class="section-desc">
-          Dokumentasi proyek terintegrasi yang mencakup sistem Bot AI otonom, aplikasi travel self-hosted, map &amp; sistem Roblox 3D, undangan digital WebGL, dan implementasi infrastruktur IT perbankan. Klik kartu untuk menonton video atau menjelajahi galeri foto berurutan resolusi penuh.
+          Dokumentasi nyata sistem integrasi database surat tugas, otomatisasi memo &amp; kwitansi utilitas, serta portal konfirmasi pembayaran retribusi yang dirancang dan dioperasikan untuk efisiensi operasional keuangan.
         </p>
-
-        <!-- Category Filter Tabs -->
-        <div class="filter-tabs">
-          <button class="filter-btn active" data-filter="all">Semua Projek (<span id="countAll">10</span>)</button>
-          <button class="filter-btn" data-filter="bot-ai">AI &amp; Telegram Bot</button>
-          <button class="filter-btn" data-filter="web3d">Web &amp; 3D Interactive</button>
-          <button class="filter-btn" data-filter="fullstack">App &amp; Desktop</button>
-          <button class="filter-btn" data-filter="game">Game Dev (Unity &amp; Roblox)</button>
-          <button class="filter-btn" data-filter="infra">IT Support</button>
-        </div>
       </div>
 
-      <!-- Video & Project Grid Container -->
-      <div class="video-grid" id="videoVaultGrid">
-        <!-- Rendered dynamically via JavaScript for easy storage and addition -->
+      <div class="projects-vault-grid">
+        
+        <!-- Project 1: Integrasi Database Surat Tugas -->
+        <article class="project-showcase-card glass-card tilt-card" data-depth="20">
+          <div class="card-glare"></div>
+          
+          <div class="project-media-wrap">
+            <img 
+              src="assets/projects/project_surat_tugas.png" 
+              alt="Integrasi Database Surat Tugas" 
+              class="project-media-img"
+              loading="lazy"
+            />
+            <div class="project-media-overlay">
+              <span class="media-badge">DATABASE &amp; MACRO INPUT</span>
+              <button class="btn-zoom-preview" data-zoom="assets/projects/project_surat_tugas.png" data-title="Integrasi Database Surat Tugas (Google Sheets App)" title="Perbesar Gambar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                <span>Zoom Pratinjau</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-body-content">
+            <div class="project-header-row">
+              <span class="project-tag-cat">DATABASE OPERASIONAL</span>
+              <span class="project-year">Google Sheets Macro</span>
+            </div>
+            
+            <h3 class="project-item-title">Integrasi Database Surat Tugas</h3>
+            
+            <p class="project-item-desc">
+              Sistem input dan pencatatan Surat Tugas divisi Finance Support terintegrasi database cloud. Dilengkapi form pengisian otomatis (Perusahaan, Keperluan, Departemen, Personil 1-3, NIK, dan Jabatan) dengan tombol simpan data (<em>Save</em>) yang secara otomatis menerbitkan penomoran surat standar audit (<code>FIS/DG/VII/26/ST/...</code>) tanpa duplikasi.
+            </p>
+
+            <div class="project-feature-bullets">
+              <span>✦ Form Input Otomatisasi Terstruktur</span>
+              <span>✦ Auto-Numbering Standard Audit (FAR)</span>
+              <span>✦ Multi-Personil Assignment &amp; Tracking NIK</span>
+            </div>
+
+            <div class="project-footer-actions">
+              <a href="https://docs.google.com/spreadsheets/d/1QqtGHChhqYhWL7B-1TwIo4Xl0PLefFDyFW7GlY3Rfn8/preview" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-project-link">
+                <span>Buka Spreadsheet ↗</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+              <button class="btn btn-secondary btn-zoom-action" data-zoom="assets/projects/project_surat_tugas.png" data-title="Integrasi Database Surat Tugas">
+                <span>Lihat Foto Detail</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Otomatisasi Memo dan Kwitansi Utilitas -->
+        <article class="project-showcase-card glass-card tilt-card" data-depth="20">
+          <div class="card-glare"></div>
+          
+          <div class="project-media-wrap">
+            <img 
+              src="assets/projects/project_memo_kwitansi.png" 
+              alt="Otomatisasi Memo dan Kwitansi Utilitas" 
+              class="project-media-img"
+              loading="lazy"
+            />
+            <div class="project-media-overlay">
+              <span class="media-badge">FINANCIAL MODELING &amp; BILLING</span>
+              <button class="btn-zoom-preview" data-zoom="assets/projects/project_memo_kwitansi.png" data-title="Otomatisasi Memo dan Kwitansi Utilitas" title="Perbesar Gambar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                <span>Zoom Pratinjau</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-body-content">
+            <div class="project-header-row">
+              <span class="project-tag-cat">COST SHARING &amp; RETRIBUSI</span>
+              <span class="project-year">Automated Billing</span>
+            </div>
+            
+            <h3 class="project-item-title">Otomatisasi Memo &amp; Kwitansi Utilitas</h3>
+            
+            <p class="project-item-desc">
+              Sistem kalkulasi dan rekonsiliasi biaya retribusi utilitas multi-wilayah operasional (Pluit MK, Makassar, Batam, Palembang, Surabaya, Bali, Mess). Mengotomasi data input tagihan PDAM, Listrik, Internet, dan Iuran RT ke dalam format Memo Internal dan Kwitansi Siap Cetak PDF, memangkas proses manual hingga 80%.
+            </p>
+
+            <div class="project-feature-bullets">
+              <span>✦ Multi-Tab: Inputan, Pembagian, Cetak Kwitansi &amp; PDF Memo</span>
+              <span>✦ Formula VLOOKUP &amp; Agregasi Utilitas Otomatis</span>
+              <span>✦ Siap Cetak PDF Instan untuk Rekapitulasi Kas</span>
+            </div>
+
+            <div class="project-footer-actions">
+              <a href="https://docs.google.com/spreadsheets/d/1iJt2n8iuEkgXTGdUM_ZJ5Fi79vFhkej0KSOykWfjp-U/preview" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-project-link">
+                <span>Buka Spreadsheet ↗</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+              <button class="btn btn-secondary btn-zoom-action" data-zoom="assets/projects/project_memo_kwitansi.png" data-title="Otomatisasi Memo dan Kwitansi Utilitas">
+                <span>Lihat Foto Detail</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Dashboard Konfirmasi Pembayaran Utilitas -->
+        <article class="project-showcase-card glass-card tilt-card" data-depth="20">
+          <div class="card-glare"></div>
+          
+          <div class="project-media-wrap">
+            <img 
+              src="assets/projects/project_dashboard_pembayaran.jpg" 
+              alt="Dashboard Konfirmasi Pembayaran Utilitas" 
+              class="project-media-img"
+              loading="lazy"
+            />
+            <div class="project-media-overlay">
+              <span class="media-badge">CENTRALIZED PAYMENT PORTAL</span>
+              <button class="btn-zoom-preview" data-zoom="assets/projects/project_dashboard_pembayaran.jpg" data-title="Dashboard Konfirmasi Pembayaran Utilitas (@Pembayaranretribusi)" title="Perbesar Gambar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                <span>Zoom Pratinjau</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-body-content">
+            <div class="project-header-row">
+              <span class="project-tag-cat">PORTAL TRANSAKSI</span>
+              <span class="project-year">Dialogue Group Portal</span>
+            </div>
+            
+            <h3 class="project-item-title">Dashboard Konfirmasi Pembayaran Utilitas</h3>
+            
+            <p class="project-item-desc">
+              Portal konfirmasi terpusat untuk alur pembayaran retribusi utilitas Dialogue Group (@Pembayaranretribusi). Mengintegrasikan petunjuk teknis panduan bayar, kanal konfirmasi instan, serta pemisahan saluran bayar per lokasi cabang (Bali, Batam, Kedungreja, dsb.) guna mengamankan arus kas harian (LKH).
+            </p>
+
+            <div class="project-feature-bullets">
+              <span>✦ Portal Navigasi Resmi Dialogue Group (@Pembayaranretribusi)</span>
+              <span>✦ Routing Jalur Konfirmasi Pembayaran Per Cabang</span>
+              <span>✦ Sinkronisasi Bukti Transfer &amp; Rekonsiliasi Kas Harian</span>
+            </div>
+
+            <div class="project-footer-actions">
+              <a href="https://linktr.ee/Pembayaranretribusi" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-project-link">
+                <span>Kunjungi Portal Link ↗</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+              <button class="btn btn-secondary btn-zoom-action" data-zoom="assets/projects/project_dashboard_pembayaran.jpg" data-title="Dashboard Konfirmasi Pembayaran Utilitas">
+                <span>Lihat Foto Detail</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
       </div>
     </section>
 
-    <!-- 03 / Skills & Tech Matrix Section -->
+    <!-- 04 / KEMAMPUAN & KETERAMPILAN -->
     <section id="skills" class="section skills-section">
       <div class="section-header">
-        <span class="section-num">03 / CAPABILITIES</span>
-        <h2 class="section-title">THE TECH MATRIX</h2>
+        <span class="section-num">04 / KOMPETENSI</span>
+        <h2 class="section-title">KEAHLIAN &amp; KETERAMPILAN</h2>
+        <p class="section-desc">Kombinasi kemampuan analisis finansial, pengoperasian sistem enterprise, dan keahlian personal adaptif.</p>
       </div>
 
-      <div class="skills-grid">
+      <div class="skills-matrix-grid">
+        
+        <!-- Category 1: Office & Spreadsheet -->
         <div class="glass-card tilt-card" data-depth="20">
           <div class="card-glare"></div>
-          <div class="skill-category-title">CREATIVE TECH & 3D</div>
-          <div class="pills-wrap">
-            <span class="pill active">Unity 6 / 3D</span>
-            <span class="pill active">C# Scripting</span>
-            <span class="pill active">Three.js</span>
-            <span class="pill active">WebGL</span>
-            <span class="pill active">GLSL Shaders</span>
-            <span class="pill active">Roblox Studio</span>
-            <span class="pill active">Lua Scripting</span>
-            <span class="pill">HTML5 Canvas</span>
-            <span class="pill">GSAP ScrollTrigger</span>
-            <span class="pill">Blender 3D</span>
+          <div class="skill-category-header">
+            <span class="category-icon">📈</span>
+            <h3 class="category-title">Office &amp; Spreadsheet Modeling</h3>
+          </div>
+          <p class="category-summary">Otomasi dan pemodelan laporan keuangan menggunakan formula tingkat lanjut.</p>
+          <div class="pills-container">
+            <span class="skill-pill active">Microsoft Excel (Advanced)</span>
+            <span class="skill-pill active">Google Sheets</span>
+            <span class="skill-pill active">VLOOKUP &amp; XLOOKUP</span>
+            <span class="skill-pill active">Pivot Table &amp; Charts</span>
+            <span class="skill-pill active">Financial Interactive Dashboard</span>
+            <span class="skill-pill active">Rekonsiliasi Bank Otomatis</span>
+            <span class="skill-pill active">Laporan Kas Harian (LKH)</span>
+            <span class="skill-pill">LibreOffice Calc</span>
           </div>
         </div>
 
+        <!-- Category 2: Sistem & ERP -->
         <div class="glass-card tilt-card" data-depth="20">
           <div class="card-glare"></div>
-          <div class="skill-category-title">AI & SYSTEM DEVELOPMENT</div>
-          <div class="pills-wrap">
-            <span class="pill active">Python</span>
-            <span class="pill active">pyTelegramBotAPI</span>
-            <span class="pill active">Groq LLM API</span>
-            <span class="pill active">Google Gemini AI</span>
-            <span class="pill active">Ollama (Local AI)</span>
-            <span class="pill">Node.js</span>
-            <span class="pill">SQLite</span>
-            <span class="pill">Docker</span>
+          <div class="skill-category-header">
+            <span class="category-icon">🏢</span>
+            <h3 class="category-title">Sistem &amp; ERP Enterprise</h3>
+          </div>
+          <p class="category-summary">Pengoperasian platform manajemen keuangan dan transisi cut-off database.</p>
+          <div class="pills-container">
+            <span class="skill-pill active">Custom In-House ERP System</span>
+            <span class="skill-pill active">Proprietary Budgeting System</span>
+            <span class="skill-pill active">Sunfish HRIS &amp; Payroll</span>
+            <span class="skill-pill active">General Ledger (GL) Software</span>
+            <span class="skill-pill active">Cut-Off Data Migration</span>
+            <span class="skill-pill active">Audit Trail Verification</span>
+            <span class="skill-pill">Accounting Voucher Management</span>
           </div>
         </div>
 
+        <!-- Category 3: Analisis & Desain / Web -->
         <div class="glass-card tilt-card" data-depth="20">
           <div class="card-glare"></div>
-          <div class="skill-category-title">FRONTEND & INFRASTRUCTURE</div>
-          <div class="pills-wrap">
-            <span class="pill active">Next.js</span>
-            <span class="pill active">React.js</span>
-            <span class="pill active">TypeScript</span>
-            <span class="pill active">Tailwind CSS</span>
-            <span class="pill active">Supabase / PostgreSQL</span>
-            <span class="pill">Vite</span>
-            <span class="pill">Playwright Scraper</span>
-            <span class="pill">Network / Switch Routing</span>
-            <span class="pill">Server Rack & Hardware</span>
-            <span class="pill">Git & GitHub</span>
+          <div class="skill-category-header">
+            <span class="category-icon">💡</span>
+            <h3 class="category-title">Keahlian Tambahan &amp; Desain</h3>
+          </div>
+          <p class="category-summary">Integrasi visualisasi data bisnis, desain grafis, dan pemahaman web.</p>
+          <div class="pills-container">
+            <span class="skill-pill active">Data Analytics &amp; Visuals</span>
+            <span class="skill-pill active">CorelDRAW Graphic Design</span>
+            <span class="skill-pill active">Pembuatan Website (Frontend)</span>
+            <span class="skill-pill active">Business Review Visual Reporting</span>
+            <span class="skill-pill">English Communication</span>
+            <span class="skill-pill">Brevet Perpajakan A &amp; B</span>
+          </div>
+        </div>
+
+        <!-- Category 4: Keterampilan Personal -->
+        <div class="glass-card tilt-card" data-depth="20">
+          <div class="card-glare"></div>
+          <div class="skill-category-header">
+            <span class="category-icon">🤝</span>
+            <h3 class="category-title">Karakter &amp; Soft Skills</h3>
+          </div>
+          <p class="category-summary">Atribut profesional pendukung kerja tim dan kepemimpinan operasional.</p>
+          <div class="pills-container">
+            <span class="skill-pill active">Teliti, Detail &amp; Akurat</span>
+            <span class="skill-pill active">Adaptif Terhadap Perubahan</span>
+            <span class="skill-pill active">Fast Learner Sistem Baru</span>
+            <span class="skill-pill active">Manajemen Waktu Efektif</span>
+            <span class="skill-pill active">Disiplin &amp; Bertanggung Jawab</span>
+            <span class="skill-pill active">Problem Solving Finansial</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 05 / PENDIDIKAN & SERTIFIKASI -->
+    <section id="education" class="section edu-section">
+      <div class="section-header">
+        <span class="section-num">05 / KREDENSIAL</span>
+        <h2 class="section-title">PENDIDIKAN &amp; SERTIFIKASI</h2>
+      </div>
+
+      <div class="edu-grid">
+        
+        <!-- Pendidikan Formal -->
+        <div class="glass-card tilt-card edu-card" data-depth="20">
+          <div class="card-glare"></div>
+          <span class="card-tag">PENDIDIKAN FORMAL</span>
+          <h3 class="edu-degree">S1 Administrasi Bisnis</h3>
+          <h4 class="edu-institution">Universitas Sangga Buana YPKP Bandung</h4>
+          <div class="edu-period">September 2017 – Maret 2021</div>
+          
+          <div class="ipk-badge">
+            <span class="ipk-title">Indeks Prestasi Kumulatif (IPK):</span>
+            <span class="ipk-score">3,41 <em>/ 4,00</em></span>
+          </div>
+
+          <p class="edu-desc">
+            Fokus mendalam pada tata kelola operasional perusahaan, analisis manajemen keuangan, strategi administrasi bisnis, dan kepatuhan sistemik.
+          </p>
+        </div>
+
+        <!-- Pelatihan & Kursus -->
+        <div class="glass-card tilt-card cert-card" data-depth="20">
+          <div class="card-glare"></div>
+          <span class="card-tag">KURSUS &amp; PELATIHAN PROFESIONAL</span>
+          
+          <ul class="cert-list">
+            <li>
+              <div class="cert-item-icon">📜</div>
+              <div class="cert-content">
+                <strong>Brevet Pajak A &amp; B</strong>
+                <span>Pemahaman ketentuan perpajakan, PPh Pasal 21, 22, 23, PPN, dan pelaporan SPT.</span>
+              </div>
+            </li>
+            <li>
+              <div class="cert-item-icon">📊</div>
+              <div class="cert-content">
+                <strong>Mini Course Data Analyst</strong>
+                <span>Pengolahan dataset, visualisasi tren bisnis, dan kalkulasi analitik kuantitatif.</span>
+              </div>
+            </li>
+            <li>
+              <div class="cert-item-icon">🌐</div>
+              <div class="cert-content">
+                <strong>Bootcamp Membuat Website</strong>
+                <span>Struktur website modern, responsivitas antarmuka, dan pemanfaatan teknologi digital.</span>
+              </div>
+            </li>
+            <li>
+              <div class="cert-item-icon">🗣️</div>
+              <div class="cert-content">
+                <strong>Rookie English — Kampung Inggris Pare</strong>
+                <span>Pengembangan kompetensi komunikasi bahasa Inggris secara aktif dan percaya diri.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Pengalaman Organisasi -->
+      <div class="org-container glass-card tilt-card" data-depth="15">
+        <div class="card-glare"></div>
+        <div class="org-header">
+          <span class="category-icon">👥</span>
+          <div>
+            <h3 class="org-heading">Pengalaman Organisasi &amp; Kepemimpinan</h3>
+            <p class="org-sub">Pengembangan soft skill komunikasi, kepemimpinan tim, dan manajemen konten visual.</p>
+          </div>
+        </div>
+
+        <div class="org-grid">
+          <div class="org-item">
+            <span class="org-year">2018 – 2021</span>
+            <h4>Himpunan Mahasiswa Islam (HMI)</h4>
+            <span class="org-role">Anggota Aktif</span>
+            <p>Berperan aktif dalam latihan kaderisasi kepemimpinan, diskusi panel, dan kajian bedah buku kritis.</p>
+          </div>
+
+          <div class="org-item">
+            <span class="org-year">2018 – 2019</span>
+            <h4>Sahabat Beasiswa Chapter Bandung</h4>
+            <span class="org-role">Divisi HRD (Human Resource Development)</span>
+            <p>Melaksanakan program upgrading anggota, mentoring internal, serta evaluasi rutin kinerja kegiatan tim.</p>
+          </div>
+
+          <div class="org-item">
+            <span class="org-year">2017 – 2018</span>
+            <h4>Sahabat Beasiswa Chapter Bandung</h4>
+            <span class="org-role">Divisi Media &amp; Design</span>
+            <p>Mendokumentasikan seluruh rangkaian kegiatan, merancang pamflet publikasi informatif, dan mengelola media sosial.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 05 / Contact Section -->
+    <!-- 06 / KONTAK & HUBUNGI -->
     <section id="contact" class="section contact-section">
-      <div class="contact-card glass-card tilt-card" data-depth="40">
+      <div class="contact-card glass-card tilt-card" data-depth="30">
         <div class="card-glare"></div>
-        <div class="contact-badge">READY TO COLLABORATE?</div>
-        <h2 class="contact-title">LET'S BUILD SOMETHING <span class="text-gradient">ICONIC.</span></h2>
+        
+        <div class="contact-badge">SIAP BERKOLABORASI</div>
+        <h2 class="contact-title">
+          MARI MEMBANGUN EFISIENSI <span class="text-gradient">FINANSIAL.</span>
+        </h2>
         <p class="contact-desc">
-          Have an ambitious 3D project, interactive web experience, or digital brand that needs to stand out? Let's discuss your vision.
+          Terbuka untuk kesempatan kerja penuh waktu (Full-time) maupun kontrak strategis dalam bidang <strong>Staff Keuangan, AR/AP Management,</strong> dan <strong>Audit Preparation</strong>.
         </p>
 
-        <div class="contact-actions">
-          <button id="copyEmailBtn" class="btn btn-primary btn-copy" data-email="rifan.dev@example.com">
-            <span class="btn-text">rifan.dev@example.com</span>
-            <span class="btn-badge">COPY</span>
-          </button>
-          <a href="mailto:rifan.dev@example.com" class="btn btn-secondary">
-            <span>Open Mail App ↗</span>
-          </a>
+        <div class="contact-methods-grid">
+          
+          <!-- Email Box -->
+          <div class="method-card">
+            <div class="method-icon">✉️</div>
+            <span class="method-label">Kirim Pesan Email</span>
+            <strong class="method-val">riankmohamadsofyan@gmail.com</strong>
+            <div class="method-btns">
+              <button class="btn btn-secondary btn-copy" data-copy="riankmohamadsofyan@gmail.com">
+                <span>Salin Email</span>
+              </button>
+              <a href="mailto:riankmohamadsofyan@gmail.com" class="btn btn-primary">
+                <span>Buka Mail App ↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- WhatsApp Box -->
+          <div class="method-card">
+            <div class="method-icon">💬</div>
+            <span class="method-label">WhatsApp Langsung</span>
+            <strong class="method-val">0859-2605-6829</strong>
+            <div class="method-btns">
+              <button class="btn btn-secondary btn-copy" data-copy="085926056829">
+                <span>Salin Nomor</span>
+              </button>
+              <a href="https://wa.me/6285926056829?text=Halo%20Rian,%20saya%20melihat%20website%20portofolio%20keuangan%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-emerald">
+                <span>Chat WhatsApp ↗</span>
+              </a>
+            </div>
+          </div>
+
         </div>
 
-        <div class="social-links">
-          <a href="https://github.com" target="_blank" rel="noreferrer" class="social-icon" title="GitHub">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="social-icon" title="LinkedIn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noreferrer" class="social-icon" title="X / Twitter">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
+        <div class="contact-location-bar">
+          <span class="loc-pin">📍</span>
+          <span>Jl. Rajawali Timur No.192/26, Kota Bandung 40182, Jawa Barat</span>
         </div>
 
-        <div class="footer-note">
-          © 2026 RIFAN. ALL RIGHTS RESERVED. CRAFTED WITH SMOOTH 3D CANVAS & HARDWARE ACCELERATION.
-        </div>
+        <footer class="footer-bottom">
+          <div class="footer-copy">
+            © 2026 RIAN KRISTIANI MOHAMAD SOFYAN. Seluruh Hak Cipta Dilindungi.
+          </div>
+          <div class="footer-meta">
+            Dibuat dengan Modern Web Standards, Canvas Graphics &amp; 360° Rotational Interactive Engine.
+          </div>
+        </footer>
+
       </div>
     </section>
 
   </main>
 
-  <!-- 3D Cinema Video Modal Player -->
-  <div id="cinemaModal" class="cinema-modal" aria-hidden="true">
-    <div class="cinema-backdrop" id="cinemaBackdrop"></div>
-    <div class="cinema-container">
-      <button class="cinema-close-btn" id="cinemaCloseBtn" title="Close Modal (Esc)">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  <!-- LIGHTBOX IMAGE MODAL -->
+  <div id="imageLightboxModal" class="image-lightbox-modal" aria-hidden="true" role="dialog" aria-label="Pratinjau Gambar Project">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-dialog">
+      <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Tutup Pratinjau (Esc)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
-
-      <div class="cinema-player-box" id="cinemaPlayerBox">
-        <video id="cinemaVideo" class="cinema-video" controls playsinline></video>
-        <div id="cinemaGalleryBox" class="cinema-gallery-box" style="display: none;">
-          <img id="cinemaGalleryImg" class="cinema-gallery-img" src="" alt="Project Showcase" />
-          <button id="galleryPrevBtn" class="gallery-nav-btn prev" title="Foto Sebelumnya (Panah Kiri)">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <button id="galleryNextBtn" class="gallery-nav-btn next" title="Foto Selanjutnya (Panah Kanan)">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
-          <div id="galleryCounter" class="gallery-counter">Foto 1 / 1</div>
-        </div>
+      <div class="lightbox-body">
+        <img id="lightboxImg" class="lightbox-img" src="" alt="Pratinjau Project" />
       </div>
-
-      <div id="galleryThumbStrip" class="gallery-thumb-strip" style="display: none;">
-        <!-- Numbered buttons [1] [2] [3] ... rendered dynamically -->
-      </div>
-
-      <div class="cinema-details">
-        <div class="cinema-meta">
-          <span class="cinema-category" id="cinemaCategory">CATEGORY</span>
-          <span class="cinema-year" id="cinemaYear">2026</span>
-          <span class="cinema-client" id="cinemaClient">CLIENT</span>
-        </div>
-        <h3 class="cinema-title" id="cinemaTitle">Project Title</h3>
-        <p class="cinema-desc" id="cinemaDesc">Project description goes here.</p>
-        <div class="cinema-tags" id="cinemaTags"></div>
+      <div class="lightbox-footer">
+        <span id="lightboxCaption" class="lightbox-caption">Judul Project</span>
       </div>
     </div>
   </div>
 
-  <script src="main.js?v=final-porto-sync"></script>
+  <!-- MODAL RINGKASAN CV LENGKAP -->
+  <div id="cvModal" class="cv-modal" aria-hidden="true" role="dialog" aria-labelledby="cvModalTitle">
+    <div class="cv-modal-backdrop" id="cvModalBackdrop"></div>
+    <div class="cv-modal-dialog">
+      <button class="cv-modal-close" id="cvCloseBtn" aria-label="Tutup Dialog CV (Esc)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+
+      <div class="cv-modal-header">
+        <span class="cv-modal-tag">DOKUMEN RESMI</span>
+        <h3 id="cvModalTitle" class="cv-modal-title">CURRICULUM VITAE LENGKAP</h3>
+        <p class="cv-modal-sub">Rian Kristiani Mohamad Sofyan — S1 Administrasi Bisnis</p>
+      </div>
+
+      <div class="cv-modal-body">
+        <div class="cv-preview-content">
+          <h4>RIAN KRISTIANI MOHAMAD SOFYAN</h4>
+          <p class="cv-meta-line">
+            📞 085926056829 | ✉️ riankmohamadsofyan@gmail.com | 📍 Jl. Rajawali Timur No.192/26, Kota Bandung
+          </p>
+          <hr class="cv-hr" />
+
+          <h5>TENTANG SAYA</h5>
+          <p>
+            Memiliki pengalaman sebagai Staff Keuangan dengan rekam jejak mengelola operasional keuangan multi-entitas dan alokasi <em>intercompany cost sharing</em>. Berpengalaman dalam pengawasan Business Review (BR), evaluasi SOP untuk kesiapan audit (FAR), serta transisi <em>cut-off</em> data ke sistem ERP. Menguasai analisis AR/AP, Laporan Kas Harian (LKH), serta visualisasi data keuangan.
+          </p>
+
+          <h5>PENGALAMAN KERJA</h5>
+          <div class="cv-exp-block">
+            <strong>Dialogue Group — Staff Finance Support (Mei 2026 – September 2026)</strong>
+            <ul>
+              <li>Memonitor dan mengevaluasi pelaporan keuangan rutin untuk 5 Perusahaan.</li>
+              <li>Memastikan operasional Laporan Kas Harian (LKH) berjalan akurat.</li>
+              <li>Melakukan cash opname (genba) secara berkala &amp; verifikasi voucher keuangan.</li>
+              <li>Bertanggung jawab atas proses cut-off data ke ERP.</li>
+              <li>Menjaga kepatuhan SOP seluruh entitas untuk memaksimalkan skor FAR.</li>
+              <li>Merinci skema alokasi pembagian biaya operasional (cost sharing) utilitas.</li>
+              <li>Menjadwalkan &amp; menyusun data BR sebelum monthly executive review.</li>
+              <li>Melakukan collection dan rekap AR/AP menjaga cashflow.</li>
+            </ul>
+          </div>
+
+          <div class="cv-exp-block">
+            <strong>PT Geoservices — Admin Finance (Maret 2022 – September 2025)</strong>
+            <ul>
+              <li>Monitoring &amp; evaluasi laporan harian tim cabang &amp; saldo keuangan cabang.</li>
+              <li>Mengelola rekap fee payment, royalti, PO, surat jalan, dan kontrak.</li>
+              <li>Membuat dan memverifikasi invoice serta monitoring jatuh tempo.</li>
+              <li>Menyusun laporan rutin AR dan rekonsiliasi bank.</li>
+            </ul>
+          </div>
+
+          <div class="cv-exp-block">
+            <strong>CV. Chillest Printing — Staff Produksi &amp; QC (Februari 2015 – Agustus 2017)</strong>
+            <ul>
+              <li>Cek kualitas produk, penyortiran bahan baku, dan evaluasi tim produksi.</li>
+            </ul>
+          </div>
+
+          <h5>PENDIDIKAN</h5>
+          <p>
+            <strong>Universitas Sangga Buana YPKP Bandung</strong> — S1 Administrasi Bisnis (2017 – 2021) | <strong>IPK: 3,41 / 4,00</strong>
+          </p>
+
+          <h5>KURSUS &amp; SERTIFIKASI</h5>
+          <p>Brevet A&amp;B • Bootcamp Membuat Website • Rookie English Kampung Inggris • Mini Course Data Analyst</p>
+        </div>
+      </div>
+
+      <div class="cv-modal-footer">
+        <button class="btn btn-secondary" id="cvPrintBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span>Cetak / Print CV</span>
+        </button>
+        <button class="btn btn-primary" id="cvCloseBtnBottom">
+          <span>Tutup Pratinjau</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js?v=1.0"></script>
 </body>
 </html>
